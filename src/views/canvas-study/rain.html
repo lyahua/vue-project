@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body{
+      width:100%;
+      height: 100%;
+      background: #ccc;
+      margin:0;
+      padding:0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+
+    setInterval(function(){
+      var div=document.createElement("div")
+      let body=document.body
+      div.style.width="2px"
+      div.style.height="100px"
+      div.style.background="#fff"
+      div.style.position="absolute"
+      div.style.top="0px"
+      div.style.left=parseInt(Math.random()*1420)+"px"
+      div.style.opacity=parseInt(Math.random()*10)/10
+      body.appendChild(div)
+
+      var k=1;
+      var timer=setInterval(function(){
+        var height=parseInt(div.style.height)
+        k++;
+        div.style.top=height+5*Math.pow(k,2)+"px"
+
+        if(div.style.top>="600px"){
+          clearInterval(timer);
+          div.parentNode.removeChild(div)
+        }
+      },10)
+    },10)
+    
+  </script>
+</body>
+</html>

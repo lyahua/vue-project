@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul,li{
+      margin:0;
+      padding:0;
+    }
+    .ulbox{
+      width:400px;
+      height: 40px;
+    }
+    .ulbox .li{
+      list-style: none;
+      float: left;
+      width:100px;
+      max-height: 40px;
+      background: orange;
+      text-align: center;
+      line-height: 40px;
+      overflow: hidden;
+      transition: max-height 0.5s;
+    }
+    .ulbox .li:hover {
+      max-height: 200px;
+    }
+    .ulbox .li:hover .abox::before{
+      display: block;
+    }
+    .dropdown{
+      width:100px;
+    }
+    .dropdown li{
+      list-style-type: none;
+      background:red;
+    }
+
+    .abox{
+      position: relative;
+      display: block;
+      width:100%;
+      height: 100%;
+    }
+    .abox::before{
+      content: "";
+      border:10px solid;
+      border-color:transparent transparent red transparent;
+      position: absolute;
+      bottom:0;
+      left:50%;
+      margin-left:-10px;
+      display: none;
+    }
+
+
+    /* 
+      css实现下拉菜单，主要用到的知识点有用到伪元素来实现小箭头的点缀，还有transition属性实现下拉菜单过渡出现，
+      不是直接崩出来的那种，提高用户体验
+
+      伪元素的具体实现如下过程，图中现在有四个颜色的小尖尖，如果不想要哪个的话，只需要把颜色改成transparent就行，
+      可以看到颜色的顺序是也上、右、下和左。
+     */
+
+     .home{
+       width:200px;
+       height:50px;
+       background:#ccc;
+       text-align: center;
+       line-height: 50px;
+       position: relative;
+     }
+     .home::before{
+       content: ""; /*只要是使用伪元素，就必须和content一起使用，里面可以接文字*/
+       border:20px solid;
+       border-color:red green blue skyblue;
+       position: absolute;
+       left:0;
+       top:50%;
+       margin-top:-20px;
+     }
+  </style>
+</head>
+
+<body>
+ 
+<ul class="ulbox">
+  <li class="libox li">
+    <a href="javascript:;" class="abox" >首页</a>
+    <ul class="dropdown">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </li>
+  <li class="li">首页</li>
+  <li class="li">首页</li>
+  <li class="li">首页</li>
+</ul>
+
+<br/>
+<br/>
+<div class="home">首页</div>
+</body>
+
+</html>

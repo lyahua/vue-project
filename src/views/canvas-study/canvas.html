@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #canvas{
+      margin:0 auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <button id="btn">撤销</button>
+  <script>
+    window.onload=function(){
+      let canvas=document.getElementById("canvas");
+      let btn=document.getElementById("btn")
+      // // 设置canvas画布的边框
+      // canvas.style.border="1px solid red";
+      // // 设置canvas画布的宽高
+      // canvas.width=500;
+      // canvas.height=500;
+      // // 获取画笔
+      // let ctx=canvas.getContext("2d");
+      // // 开始路径
+      // ctx.beginPath(); 
+      // ctx.moveTo(100,100);
+      // ctx.lineTo(200,100);
+      // ctx.lineTo(200,500)
+      // // 路径描边，不描边看不到
+      // ctx.stroke();
+
+      // // 开始一条新路径
+      // ctx.beginPath();
+      // ctx.moveTo(400,400)
+      // ctx.lineTo(400,300);
+      // ctx.stroke()
+
+
+
+
+
+      //设置vanvas标签的宽度和高度，不要通过css来直接改变canvas的宽高，会导致图形变形
+      canvas.width=900;
+      canvas.height=600;
+      canvas.style.border="1px solid skyblue"
+
+      // 获取画笔
+      let context=canvas.getContext("2d")
+
+      // 存储路径
+      let arr=[]
+
+      // 当鼠标按下触发mousedown事件时，定义一个函数获取鼠标的起始坐标
+      canvas.onmousedown=function(e){
+        // console.log("e",e)
+        var x=e.clientX-canvas.getBoundingClientRect().left;
+        var y=e.clientY-canvas.getBoundingClientRect().top;
+        context.beginPath(); //开始规划路径
+        console.log("x.y",x,y)
+        context.moveTo(x,y); //移动起始点
+        // 当鼠标移动触发onmousemove事件时，定义一个函数获取绘制线条的坐标
+        canvas.onmousemove=function(event){
+          var x=event.clientX-canvas.getBoundingClientRect().left
+          var y=event.clientY-canvas.getBoundingClientRect().top;
+          // canvas.clearRect(0,0,900,600)
+          context.lineTo(x,y); // 绘制线条
+          context.stroke(); // 绘制描边
+          arr.push({x:x,y:y})
+         
+          
+        };
+        // 当鼠标按键被松开时，onmousemove函数返回null
+        canvas.onmouseup=function(event){
+          canvas.onmousemove=null
+        }
+      }
+      btn.onclick=function(){
+        console.log("arr",arr)
+      }
+
+    }
+  </script>
+</body>
+</html>
