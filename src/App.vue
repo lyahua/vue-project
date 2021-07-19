@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view name="login" v-if='$route.path==="/"||$route.path==="/register"'></router-view>
+    <Layout v-else></Layout>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Layout from "@/layouts/Layout.vue"
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    Layout,
+  },
+  watch:{
+     $route: function(to, from) {
+      console.log('url发生了变化', to, from)
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html,body{
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 100%;
+  }
+  #app{
+    height: 100%;
+    width:100%;
+  }
 </style>
